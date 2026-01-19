@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora APGAR</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 420px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .item {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    select {
+      width: 100%;
+      padding: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    #resultado {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Calculadora APGAR</h1>
+
+    <div class="item">
+      <label>Apariencia (Color)</label>
+      <select id="apariencia">
+        <option value="0">0 – Cianótico / pálido</option>
+        <option value="1">1 – Acrocianosis</option>
+        <option value="2">2 – Rosado</option>
+      </select>
+    </div>
+
+    <div class="item">
+      <label>Pulso</label>
+      <select id="pulso">
+        <option value="0">0 – Ausente</option>
+        <option value="1">1 – &lt; 100 lpm</option>
+        <option value="2">2 – ≥ 100 lpm</option>
+      </select>
+    </div>
+
+    <div class="item">
+      <label>Gesticulación (Reflejos)</label>
+      <select id="reflejos">
+        <option value="0">0 – Sin respuesta</option>
+        <option value="1">1 – Mueca</option>
+        <option value="2">2 – Llanto / estornudo</option>
+      </select>
+    </div>
+
+    <div class="item">
+      <label>Actividad (Tono muscular)</label>
+      <select id="actividad">
+        <option value="0">0 – Flácido</option>
+        <option value="1">1 – Flexión ligera</option>
+        <option value="2">2 – Movimiento activo</option>
+      </select>
+    </div>
+
+    <div class="item">
+      <label>Respiración</label>
+      <select id="respiracion">
+        <option value="0">0 – Ausente</option>
+        <option value="1">1 – Lenta / irregular</option>
+        <option value="2">2 – Llanto fuerte</option>
+      </select>
+    </div>
+
+    <button onclick="calcularApgar()">Calcular APGAR</button>
+
+    <div id="resultado"></div>
+  </div>
+
+  <script>
+    function calcularApgar() {
+      const total =
+        parseInt(document.getElementById("apariencia").value) +
+        parseInt(document.getElementById("pulso").value) +
+        parseInt(document.getElementById("reflejos").value) +
+        parseInt(document.getElementById("actividad").value) +
+        parseInt(document.getElementById("respiracion").value);
+
+      let interpretacion = "";
+
+      if (total >= 7) {
+        interpretacion = "Buen estado neonatal";
+      } else if (total >= 4) {
+        interpretacion = "Depresión moderada";
+      } else {
+        interpretacion = "Depresión severa";
+      }
+
+      document.getElementById("resultado").innerHTML =
+        `APGAR: ${total}/10 <br>${interpretacion}`;
+    }
+  </script>
+</body>
+		</html>
